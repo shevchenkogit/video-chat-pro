@@ -11,7 +11,7 @@ import { setUpStorage } from "./redux/storage";
 import { socketURL } from './configs/urls';
 
 // 1. Ініціалізація Store та Google Client ID
-const GOOGLE_CLIENT_ID = "25221554190-joknti74u1roiqoggn3jdd7pqsfuo9pl.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = 
 const storage = setUpStorage();
 
 // 2. Створення контексту для Socket.io

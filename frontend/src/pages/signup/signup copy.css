@@ -1,0 +1,302 @@
+/* Базовий фон сторінки */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Гарний градієнт */
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Картка реєстрації */
+.signup-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.signup-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.signup-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 28px;
+}
+
+.signup-header p {
+    color: #777;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Поля вводу */
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.main-input {
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.main-input:focus {
+    border-color: #764ba2;
+    outline: none;
+    box-shadow: 0 0 8px rgba(118, 75, 162, 0.2);
+}
+
+/* Капча та кнопки */
+.captcha-wrapper {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #764ba2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #5a3a7e;
+}
+
+.submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Розділювач "або" */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #aaa;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.divider span {
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+/* Футер картки */
+.signup-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: #764ba2;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Додайте це на початок або в кінець вашого файлу signup.css */
+
+@keyframes slideUpFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px); /* Починаємо на 30px нижче */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Повертаємо в початкову позицію */
+    }
+}
+
+.signup-card {
+    /* ... ваші існуючі стилі (background, padding тощо) ... */
+    
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+
+    /* ДОДАЄМО ЦЕЙ РЯДОК: */
+    animation: slideUpFadeIn 0.6s ease-out forwards;
+}
+
+.input-group {
+    animation: slideUpFadeIn 0.5s ease-out both;
+}
+
+/* Затримка для кожного наступного поля */
+.input-group:nth-child(1) { animation-delay: 0.2s; }
+.input-group:nth-child(2) { animation-delay: 0.3s; }
+.input-group:nth-child(3) { animation-delay: 0.4s; }
+.captcha-wrapper { animation: slideUpFadeIn 0.5s ease-out both; animation-delay: 0.5s; }
+.actions-wrapper { animation: slideUpFadeIn 0.5s ease-out both; animation-delay: 0.6s; }
+
+/* Анімація появи */
+@keyframes slideUpFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 15px; /* Менші відступи для мобільних */
+    box-sizing: border-box;
+}
+
+.signup-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 420px;
+    animation: slideUpFadeIn 0.7s ease-out forwards;
+    box-sizing: border-box;
+}
+
+/* --- АДАПТИВНІСТЬ (Media Queries) --- */
+
+@media (max-width: 480px) {
+    .signup-card {
+        padding: 25px 20px; /* Зменшуємо внутрішні відступи на малих екранах */
+        border-radius: 12px;
+    }
+
+    .signup-header h2 {
+        font-size: 22px; /* Трохи менший шрифт заголовка */
+    }
+
+    .main-input {
+        padding: 10px; /* Зручніше для натискання пальцем */
+        font-size: 14px;
+    }
+
+    /* Масштабуємо капчу, щоб вона не виходила за межі екрана */
+    .captcha-wrapper {
+        transform: scale(0.85); 
+        transform-origin: center;
+        margin-left: -10px; 
+    }
+}
+
+/* Стилі для елементів форми */
+.signup-header { text-align: center; margin-bottom: 25px; }
+.input-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+.input-group label { font-size: 13px; font-weight: 600; color: #555; margin-bottom: 5px; }
+
+.main-input {
+    border: 2px solid #f0f0f0;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.main-input:focus {
+    border-color: #764ba2;
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #764ba2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:disabled { background: #ccc; }
+
+/* Стиль для інпуту, коли є помилка */
+.main-input.input-error {
+    border-color: #ff4d4d !important;
+    background-color: #fffafa;
+}
+
+/* Стиль тексту помилки */
+.error-text {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+    /* Анімація появи тексту */
+    animation: fadeInError 0.3s ease-in-out;
+}
+
+@keyframes fadeInError {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #888;
+}
+
+.auth-divider::before, .auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-divider span {
+    padding: 0 10px;
+    font-size: 14px;
+}

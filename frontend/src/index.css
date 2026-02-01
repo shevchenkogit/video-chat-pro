@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  /* Додано оновлений список системних шрифтів для кращої підтримки */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* ЗАПОБІГАЄ ВИПАДКОВИМ СКРОЛАМ НА МОБІЛКАХ ПРИ ДЗВІНКАХ */
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  
+  /* ПРИБИРАЄ СИНЄ ВИДІЛЕННЯ ПРИ НАТИСКАННІ НА КНОПКИ (Mobile UX) */
+  -webkit-tap-highlight-color: transparent;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ГЛОБАЛЬНЕ НАЛАШТУВАННЯ ДЛЯ ПРАВИЛЬНОГО РОЗРАХУНКУ РОЗМІРІВ */
+* {
+  box-sizing: border-box;
+}
+
+/* СТИЛІЗАЦІЯ СКРОЛБАРУ (щоб чат виглядав сучасно в Chrome/Edge/Safari) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,183 @@
+/* --- ОСНОВНИЙ КОНТЕЙНЕР --- */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 15px;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* --- КАРТКА РЕЄСТРАЦІЇ --- */
+.signup-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 420px;
+    animation: slideUpFadeIn 0.7s ease-out forwards;
+    box-sizing: border-box;
+}
+
+.signup-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.signup-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 28px;
+}
+
+.signup-header p {
+    color: #777;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* --- ПОЛЯ ВВОДУ ТА ГРУПИ --- */
+.input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    animation: slideUpFadeIn 0.5s ease-out both;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.main-input {
+    padding: 12px 15px;
+    border: 2px solid #f0f0f0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.main-input:focus {
+    border-color: #764ba2;
+    outline: none;
+    box-shadow: 0 0 8px rgba(118, 75, 162, 0.2);
+}
+
+.main-input.input-error {
+    border-color: #ff4d4d !important;
+    background-color: #fffafa;
+}
+
+.error-text {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+    animation: fadeInError 0.3s ease-in-out;
+}
+
+/* --- КАПЧА ТА КНОПКИ --- */
+.captcha-wrapper {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    animation: slideUpFadeIn 0.5s ease-out both;
+    animation-delay: 0.5s;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #764ba2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #5a3a7e;
+    transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* --- РОЗДІЛЮВАЧ ТА ГУГЛ --- */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #888;
+}
+
+.auth-divider::before, .auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-divider span {
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.google-signup-wrapper {
+    animation: slideUpFadeIn 0.5s ease-out both;
+    animation-delay: 0.6s;
+}
+
+/* --- ФУТЕР --- */
+.signup-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: #764ba2;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* --- АНІМАЦІЇ --- */
+@keyframes slideUpFadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInError {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Затримки для полів */
+.input-group:nth-child(1) { animation-delay: 0.2s; }
+.input-group:nth-child(2) { animation-delay: 0.3s; }
+.input-group:nth-child(3) { animation-delay: 0.4s; }
+
+/* --- АДАПТИВНІСТЬ --- */
+@media (max-width: 480px) {
+    .signup-card { padding: 25px 20px; }
+    .signup-header h2 { font-size: 22px; }
+    .main-input { padding: 10px; font-size: 14px; }
+    .captcha-wrapper {
+        transform: scale(0.85);
+        transform-origin: center;
+    }
+}

@@ -1,0 +1,60 @@
+/* --- Search Result Item --- */
+.search-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f0f2f5;
+    transition: background-color 0.2s ease;
+}
+
+.search-item:hover {
+    background-color: #f9f9f9;
+}
+
+.search-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Distinct avatar color for search results (Orange) */
+.search-avatar {
+    background-color: #ff9800 !important; 
+}
+
+/* --- Search Action Button --- */
+.btn-add-search {
+    width: fit-content;
+    padding: 6px 15px;
+    margin-top: 5px;
+    
+    background-color: #0084ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 18px;
+    
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-add-search:hover {
+    background-color: #0073e6;
+    transform: translateY(-1px);
+}
+
+.btn-add-search:active {
+    transform: translateY(0);
+    transform: scale(0.97);
+}
+
+/* Status/Feedback Message */
+.search-msg {
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0084ff;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Підтвердження пошти</title>
+    <style>
+        /* Базові стилі для скидання налаштувань поштовиків */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #333333;
+        }
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #f4f7f9;
+            padding-bottom: 40px;
+        }
+        .main-card {
+            background-color: #ffffff;
+            margin: 40px auto;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid #e1e8ed;
+        }
+        .header-bg {
+            background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+        .content {
+            padding: 40px 30px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .content h1 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #1a1a1a;
+        }
+        .content p {
+            font-size: 16px;
+            color: #555555;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            background-color: #1e90ff;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+            padding: 20px;
+        }
+        /* Адаптивність */
+        @media screen and (max-width: 600px) {
+            .main-card {
+                margin: 0;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="display: none; max-height: 0px; overflow: hidden;">
+        Підтвердьте вашу пошту, щоб почати користуватися додатком для дзвінків.
+    </div>
+    <div class="wrapper">
+        <div class="main-card">
+            <div class="header-bg">
+                <div style="font-size: 40px; font-weight: bold;">👋</div>
+            </div>
+
+            <div class="content">
+                <h1>Вітаємо, {{name}}!</h1>
+                <p>Ми раді вітати вас у нашому новому додатку для дзвінків. Щоб почати користуватися всіма можливостями, будь ласка, підтвердьте вашу електронну адресу.</p>
+                
+                <a href="{{www}}email_vereficated?token={{token}}" class="btn">
+                    Підтвердити пошту
+                </a>
+                
+                <p style="margin-top: 30px; font-size: 14px; color: #888;">
+                    Якщо ви не реєструвалися у нас, просто проігноруйте цей лист.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; Easy call Team. Made with ❤️ for better communication.
+        </div>
+    </div>
+</body>
+</html>

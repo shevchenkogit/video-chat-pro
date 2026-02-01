@@ -1,0 +1,57 @@
+/* Container Layout */
+.brd {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    flex-wrap: wrap;
+}
+
+/* Google Auth Button */
+.google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    
+    /* Branding & Colors */
+    background-color: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    
+    /* Typography */
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+/* Interaction States */
+.google-button:hover:not(:disabled) {
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 
+                0 4px 8px 3px rgba(60, 64, 67, 0.15);
+}
+
+.google-button:active:not(:disabled) {
+    transform: scale(0.98); /* Slight click effect */
+}
+
+.google-button:disabled {
+    cursor: not-allowed;
+    filter: grayscale(1);
+    opacity: 0.6;
+}
+
+/* Icon Styling */
+.google-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    display: block;
+}

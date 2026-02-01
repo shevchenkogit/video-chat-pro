@@ -1,0 +1,167 @@
+/* --- ОСНОВНИЙ КОНТЕЙНЕР --- */
+.video-chat-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background: radial-gradient(circle at center, #f8f9fa 0%, #e9ecef 100%);
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+/* --- ВІДЕО-БЛОКИ --- */
+.video-box {
+    position: relative;
+    background: #dee2e6;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+}
+
+.VideoFrame, video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.user-label {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #495057;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 10;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* --- ДЕСКТОП: РЕЖИМИ --- */
+@media (min-width: 769px) {
+    .VideoFrames.layout-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+        gap: 20px; 
+        padding: 40px; 
+        height: 100vh;
+        box-sizing: border-box;
+    }
+
+    .VideoFrames.layout-speaker {
+        display: grid;
+        grid-template-columns: 1fr 250px;
+        gap: 15px; 
+        padding: 20px; 
+        height: 100vh;
+    }
+    .VideoFrames.layout-speaker .video-box.focused { grid-column: 1; grid-row: 1 / 10; }
+    .VideoFrames.layout-speaker .video-box.minimized { height: 150px; grid-column: 2; }
+
+    .VideoFrames.layout-pip {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+        gap: 20px; padding: 40px; height: 100vh;
+    }
+    .VideoFrames.layout-pip .my-video {
+        position: absolute; bottom: 120px; right: 40px;
+        width: 280px; height: 160px; z-index: 100;
+        border: 2px solid #0084ff;
+    }
+}
+
+/* --- МОБІЛЬНИЙ: РОЗПОДІЛ --- */
+@media (max-width: 768px) {
+    .VideoFrames.layout-grid.count-2 {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 1fr 1fr !important;
+        height: 100vh; gap: 4px;
+    }
+
+    .VideoFrames.layout-grid:not(.count-2) {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: 1fr 1fr !important;
+        height: 100vh; gap: 2px;
+    }
+    .VideoFrames.layout-grid.count-3 .video-box:last-child { grid-column: span 2; }
+
+    .VideoFrames.layout-pip { position: relative; height: 100vh; }
+    .VideoFrames.layout-pip .video-box.focused { width: 100vw; height: 100vh; border-radius: 0; }
+    .VideoFrames.layout-pip .video-box.minimized {
+        position: absolute; bottom: 130px; right: 20px;
+        width: 110px; height: 165px; z-index: 100;
+        border: 2px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+}
+
+/* --- ПАНЕЛЬ КЕРУВАННЯ --- */
+.ModernControlPanel {
+    position: fixed; 
+    bottom: 35px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    z-index: 1000; 
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ModernControlPanel.hidden { 
+    opacity: 0; 
+    transform: translateX(-50%) translateY(100px); 
+}
+
+.GlassButtons {
+    display: flex; 
+    gap: 12px; 
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    padding: 10px 20px; 
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.btn-round {
+    width: 50px; height: 50px; border-radius: 50%; border: none; background: #fff;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.btn-round:hover { transform: translateY(-2px); background: #f1f3f5; }
+.btn-round.off { background: #ff3b30 !important; color: white; }
+.btn-round.active-screen { background: #0084ff; color: white; }
+.end-call-btn { background: #ff3b30 !important; color: white; width: 60px !important; }
+
+/* --- SWITCH CAMERA (MOBILE) --- */
+.switch-cam-floating {
+    position: absolute; top: 20px; right: 20px; width: 50px; height: 50px;
+    border-radius: 50%; background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10; cursor: pointer; transition: all 0.3s ease;
+}
+
+/* --- OVERLAYS --- */
+.new-call-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.75); display: flex; justify-content: center;
+    align-items: center; z-index: 10000; backdrop-filter: blur(5px);
+}
+
+.new-call-card {
+    background: #2c3e50; padding: 30px; border-radius: 20px;
+    text-align: center; color: white; width: 320px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

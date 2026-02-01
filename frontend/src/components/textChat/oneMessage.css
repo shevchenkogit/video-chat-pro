@@ -1,0 +1,81 @@
+/* --- Message Row Container --- */
+.message-wrapper {
+    display: flex;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/* Alignment based on ownership */
+.message-wrapper.own {
+    justify-content: flex-end;
+}
+
+.message-wrapper.friend {
+    justify-content: flex-start;
+}
+
+/* --- Message Bubble Base --- */
+.message-bubble {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+/* Own messages styling (Right side) */
+.own .message-bubble {
+    background-color: #dcf8c6;
+    border-bottom-right-radius: 2px;
+    color: #1c1e21;
+}
+
+/* Friend's messages styling (Left side) */
+.friend .message-bubble {
+    background-color: #ffffff;
+    border-bottom-left-radius: 2px;
+    color: #1c1e21;
+}
+
+/* --- Content Styling --- */
+.message-text {
+    font-size: 15px;
+    line-height: 1.4;
+    word-break: break-word; /* Prevents long words from overflowing */
+    white-space: pre-wrap;   /* Keeps message formatting/line breaks */
+}
+
+/* Metadata Block (Time & Status) */
+.message-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 2px;
+    align-self: flex-end;
+}
+
+.message-time {
+    font-size: 10px;
+    color: #667781;
+    user-select: none;
+}
+
+/* --- Status Indicators (Checkmarks) --- */
+.message-status {
+    display: flex;
+    align-items: center;
+}
+
+.message-status.sent {
+    color: #8696a0; /* Gray - Delivered */
+}
+
+.message-status.read {
+    color: #53bdeb; /* Blue - Seen */
+}

@@ -1,0 +1,105 @@
+/* --- Video Grid Container --- */
+.VideoFrames {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.VideoFrame {
+    width: 45%; /* Two videos per row ideally */
+    max-width: 500px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ff4b4b; /* Your red border */
+    background-color: #2c2c2c;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* --- Call Control Panel --- */
+.PanelControlButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    padding: 15px;
+}
+
+.PanelControlButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f0f2f5;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.PanelControlButton:hover {
+    background-color: #add8e6; /* lightblue */
+    box-shadow: 0px 0px 12px 4px #add8e6;
+}
+
+/* Specific End Call Button */
+.PanelControlButtonENDCALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+    background-color: #ff4b4b;
+    border-radius: 50%;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.PanelControlButtonENDCALL:hover {
+    background-color: #8a2be2; /* blueviolet */
+    transform: scale(1.1);
+}
+
+/* --- Add User Menu --- */
+.AddUserManu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.AddUserINPUT {
+    width: 250px;
+    height: 35px;
+    padding: 0 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.AddUserBUTTON {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #888;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.AddUserBUTTON:hover {
+    background-color: #228b22; /* forestgreen */
+}

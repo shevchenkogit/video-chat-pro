@@ -1,0 +1,705 @@
+/* --- Глобальні налаштування --- */
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Бокова панель (Sidebar) --- */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    min-width: 300px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar-header {
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.my-profile-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.user-name-display {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1c1e21;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- Пошук --- */
+.search-container {
+    width: 100%;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    padding: 6px 12px;
+    transition: background-color 0.2s;
+}
+
+.search-input-wrapper:focus-within {
+    background-color: #e4e6eb;
+    outline: 1px solid #0084ff;
+}
+
+.sidebar-search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* --- Список друзів --- */
+.friend-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.friend-item:hover { background-color: #f5f6f7; }
+
+.friend-avatar-wrapper {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+/* Точка статусу (Ідеально кругла) */
+.status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    background-color: #ccc;
+    z-index: 5;
+}
+
+.status-dot.online {
+    background-color: #25d366;
+    box-shadow: 0 0 4px rgba(37, 211, 102, 0.4);
+}
+
+.status-dot.online::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: #25d366;
+    border-radius: 50%;
+    z-index: -1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+    0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.8; }
+    80%, 100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; }
+}
+
+/* --- Зона чату --- */
+.chat-area {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100vh;
+}
+
+.chat-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #f0f2f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.message-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #e5ddd5;
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    background-blend-mode: overlay;
+}
+
+/* --- Повідомлення --- */
+.message-wrapper {
+    display: flex;
+    width: 100%;
+    margin-bottom: 2px;
+    animation: fadeInSlideUp 0.3s ease-out forwards;
+}
+
+.message-wrapper.own { justify-content: flex-end; }
+.message-wrapper.friend { justify-content: flex-start; }
+
+.message-bubble {
+    max-width: 70%;
+    padding: 8px 14px;
+    font-size: 15px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    word-wrap: break-word;
+}
+
+.message-wrapper.own .message-bubble { background-color: #eeffde; border-radius: 15px 15px 2px 15px; }
+.message-wrapper.friend .message-bubble { background-color: #ffffff; border-radius: 15px 15px 15px 2px; }
+/* Батьківський сірий контейнер */
+.message-input {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #f0f2f5;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: center; /* Центруємо саму форму, якщо вона має max-width */
+}
+
+/* Біла підкладка (форма) */
+.chat-input-form {
+    display: flex;
+    align-items: flex-end;
+    background-color: #fff;
+    border-radius: 22px;
+    padding: 5px 15px;
+    gap: 10px;
+    width: 100%; /* Розтягуємо на всю доступну ширину */
+    max-width: 100%; /* Гарантуємо відсутність обмежень */
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Саме поле для тексту */
+.chat-textarea {
+    flex: 1; /* Займає весь простір від лівого краю до кнопки */
+    border: none;
+    outline: none;
+    padding: 10px 5px;
+    font-size: 16px;
+    resize: none;
+    background: transparent;
+    font-family: inherit;
+    line-height: 1.4;
+    min-height: 40px;
+    max-height: 200px;
+    overflow-y: auto;
+    
+    /* ФІКС: Текст має бути зліва */
+    text-align: left; 
+    width: 100%;
+}
+
+/* Кнопка відправки */
+.send-button {
+    background: none;
+    border: none;
+    color: #0084ff;
+    cursor: pointer;
+    padding: 8px;
+    flex-shrink: 0; /* Щоб кнопка не стискалася */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* --- МОДНЕ ВІКНО ВИКЛИКУ --- */
+.recivingCall {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px); /* Розмиття фону */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.caller-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.caller-info img {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 132, 255, 0.4);
+    margin-bottom: 20px;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.caller-info h1 {
+    color: white;
+    font-size: 24px;
+    font-weight: 300;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.call-buttons { display: flex; gap: 25px; }
+
+.btn-accept, .btn-decline {
+    padding: 14px 35px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    color: white;
+}
+
+.btn-accept { background: linear-gradient(135deg, #25d366, #128c7e); }
+.btn-accept:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); }
+
+.btn-decline { background: linear-gradient(135deg, #ff4b4b, #c62828); }
+.btn-decline:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(255, 75, 75, 0.4); }
+
+/* Додаткові анімації */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes fadeInSlideUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.chat-input-container {
+    width: 100%;
+}
+
+
+.modern-call-btn {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: white;
+    outline: none;
+}
+
+/* Стан: Синя кнопка (Очікування) */
+.modern-call-btn.inactive {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+/* Стан: Зелена кнопка (Активний дзвінок) */
+.modern-call-btn.active {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* Скляний відблиск зверху */
+.btn-glass-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+    border-radius: 15px 15px 0 0;
+    pointer-events: none;
+}
+
+.modern-call-btn:hover {
+    transform: translateY(-3px) scale(1.08);
+    /* При ховері синя кнопка може ставати трохи зеленішою */
+    filter: brightness(1.1);
+}
+
+.modern-call-btn:active {
+    transform: scale(0.92);
+}
+
+.icon-wrapper svg {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* Пульсація навколо для залучення уваги */
+.pulse-ring {
+    position: absolute;
+    inset: -4px;
+    border: 2px solid #10b981;
+    border-radius: 19px;
+    opacity: 0;
+    animation: ring-pulse 2s infinite;
+}
+
+/* @keyframes ring-pulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.4); opacity: 0; }
+} */
+
+/* userPage.css */
+
+/* Стилі для мобільних пристроїв (ширина менше 768px) */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: 100vh; /* Важливо для мобільних */
+    }
+
+    /* За замовчуванням на мобільному показуємо SIDEBAR на всю ширину */
+    .sidebar {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* За замовчуванням ховаємо CHAT AREA */
+    .chat-area {
+        display: none;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* === ЛОГІКА ПЕРЕМИКАННЯ === */
+    /* Якщо ми додали клас 'chat-active' до контейнера, то ховаємо сайдбар і показуємо чат */
+    .container.chat-active .sidebar {
+        display: none;
+    }
+
+    .container.chat-active .chat-area {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.mobile-back-btn {
+    display: none; /* Прихована на комп'ютері */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #333;
+}
+.chat-title{
+    font-size: xx-large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+@media (max-width: 768px) {
+    .mobile-back-btn {
+        display: block; /* Видима на мобільному */
+    }
+    .chat-title{
+        font-size: large;
+    }
+
+}
+
+.chat-input-container {
+    position: relative; /* Для позиціонування панелі смайлів */
+    display: flex;
+    flex-direction: column;
+}
+
+.emoji-picker-wrapper {
+    position: absolute;
+    bottom: 100%; /* Панель буде над полем вводу */
+    left: 0;
+    margin-bottom: 10px;
+    z-index: 1000;
+}
+
+.chat-input-form {
+    display: flex;
+    align-items: flex-end; /* Для коректного вигляду, коли textarea росте */
+    gap: 8px;
+    padding: 10px;
+}
+
+.emoji-toggle-button {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding-bottom: 5px; /* Вирівнювання по центру з інпутом */
+}
+
+.chat-textarea {
+    flex: 1;
+    resize: none;
+    max-height: 150px; /* Обмежимо максимальну висоту */
+    padding: 10px;
+    border-radius: 20px;
+    /* ваші інші стилі */
+}
+
+.unread-badge {
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 18px;
+    text-align: center;
+}
+
+.missed-call-icon {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-left: 5px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+.friend-list-item-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.badges-container {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+    pointer-events: none; /* Щоб клік проходив крізь баджі на рядок друга */
+}
+
+.unread-badge {
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.missed-call-icon {
+    color: #ff4d4d;
+    font-weight: bold;
+    font-size: 16px;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.missed-call-icon {
+    color: #ff4d4d;
+    font-weight: bold;
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Контейнер для сповіщення про активний дзвінок всередині чату */
+.join-active-call-alert {
+    position: sticky;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    z-index: 10;
+    animation: slideUp 0.3s ease-out;
+}
+
+/* Сама картка сповіщення */
+.alert-content {
+    background-color: #ffffff;
+    border: 2px solid #2ecc71;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 8px 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.alert-content span {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+/* Міні-кнопка приєднання */
+.btn-accept-mini {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-accept-mini:hover {
+    background-color: #27ae60;
+}
+
+/* Кнопка закриття (хрестик) */
+.btn-dismiss {
+    background: none;
+    border: none;
+    color: #95a5a6;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 5px;
+}
+
+.btn-dismiss:hover {
+    color: #7f8c8d;
+}
+
+/* Анімація появи */
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.call-ended-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    animation: fadeOut 5s forwards;
+    z-index: 1000;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.user-name-display strong, 
+.chat-title strong,
+.friend-list-item-wrapper,
+.caller-info h1 {
+    text-transform: capitalize;
+}
+
+
+.typing-status {
+    font-size: 12px;
+    color: #25d366; /* Зелений колір */
+    font-weight: normal;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+/* Анімація для крапок */
+.typing-status::after {
+    content: '...';
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    vertical-align: bottom;
+    animation: typing-dots 1.5s infinite;
+}
+
+@keyframes typing-dots {
+    0% { width: 0; }
+    33% { width: 4px; }
+    66% { width: 8px; }
+    100% { width: 12px; }
+}
+
+.typing-status {
+    font-size: 13px;
+    color: #25d366;
+    font-weight: 400;
+    margin-left: 8px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
